@@ -35,14 +35,13 @@
         .powerbi-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
         .powerbi-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
-        /* HIGH-VISIBILITY UN-BLOCKABLE COMMAND BUTTON */
-        .linkedin-button-card { background: #e0f2fe; border: 2px solid #005a9c; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,90,156,0.1); }
-        .linkedin-action-btn { display: inline-block; background: #0077b5; color: #ffffff; text-decoration: none; padding: 15px 35px; font-size: 1.2em; font-weight: bold; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.2s ease; border-bottom: 4px solid #004b73; }
-        .linkedin-action-btn:hover { background: #005a87; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-        
-        .contact-info { text-align: center; margin-top: 40px; padding: 20px; background: #002b49; color: #fff; border-radius: 8px; }
-        .contact-info a { color: #cbd5e1; text-decoration: none; font-weight: bold; }
-        .contact-info a:hover { color: #fff; }
+        /* BOARDROOM-READY FOOTER CORE STYLING */
+        .contact-info { text-align: center; margin-top: 40px; padding: 35px 20px; background: #002b49; color: #fff; border-radius: 8px; border-top: 4px solid #005a9c; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .contact-info h3 { margin-top: 0; font-size: 1.5em; letter-spacing: 0.5px; color: #fff; }
+        .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 20px; font-size: 1.1em; }
+        .contact-item { background: rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); }
+        .contact-info a { color: #cbd5e1; text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .contact-info a:hover { color: #ffffff; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -58,18 +57,12 @@
         <p>Over a decade of veteran experience steering high-stakes multi-site technology deployments, full-lifecycle cloud database migrations, and multi-billion dollar Capital Expenditure (CapEx) frameworks across Civilian, Federal, and Defense perimeters. Expert in commanding production-ready Azure SQL Serverless architectures, dynamic T-SQL/Python automation pipelines, and cross-functional matrixed team accountability under strict triple-constraint baselines.</p>
     </div>
 
-    <!-- EMERGENCY HIGH-VISIBILITY VERIFIED LINKEDIN PORTAL OVERRIDE -->
-    <div class="linkedin-button-card">
-        <h3 style="margin-top:0; color:#002b49; font-size: 1.4em;">Sovereign Professional Network Connection</h3>
-        <p style="color:#334155; margin-bottom:20px; font-weight: 500;">Click the certified clearance portal below to access my fully verified, active professional network record and corporate history on LinkedIn:</p>
-        <a href="https://linkedin.com/in/johnny-c-0a621b3" target="_blank" class="linkedin-action-btn">🔗 CONNECT ON LINKEDIN PROFILE</a>
-    </div>
-
     <!-- LIVE 5-TAB INTERACTIVE INTEL BI CORE -->
     <div class="section">
         <h2>Live Business Intelligence Operations Deck</h2>
         <p>Select an operational theater below to load the live, integrated multi-line data matrices streaming straight from my cloud infrastructure database pools:</p>
         
+        <!-- THE CONTROLS ROW -->
         <div class="tab-container">
             <button class="tab-btn active" onclick="switchTab('tab1')">1. Federal & Military Requests</button>
             <button class="tab-btn" onclick="switchTab('tab2')">2. Federal & Military Allocation</button>
@@ -78,30 +71,35 @@
             <button class="tab-btn" onclick="switchTab('tab5')">5. Sovereign Asset Verification</button>
         </div>
 
+        <!-- DASHBOARD CONTAINER 1 -->
         <div id="tab1" class="bi-panel active">
             <div class="powerbi-wrapper">
                 <iframe title="FedMilReqRep" src="https://powerbi.com" allowFullScreen="true"></iframe>
             </div>
         </div>
 
+        <!-- DASHBOARD CONTAINER 2 -->
         <div id="tab2" class="bi-panel">
             <div class="powerbi-wrapper">
                 <iframe title="FedGMilAllocQA" src="https://powerbi.com" allowFullScreen="true"></iframe>
             </div>
         </div>
 
+        <!-- DASHBOARD CONTAINER 3 -->
         <div id="tab3" class="bi-panel">
             <div class="powerbi-wrapper">
                 <iframe title="AllocNodeCapEx" src="https://powerbi.com" allowFullScreen="true"></iframe>
             </div>
         </div>
 
+        <!-- DASHBOARD CONTAINER 4 -->
         <div id="tab4" class="bi-panel">
             <div class="powerbi-wrapper">
                 <iframe title="AllocNodeCapExB" src="https://powerbi.com" allowFullScreen="true"></iframe>
             </div>
         </div>
 
+        <!-- DASHBOARD CONTAINER 5 -->
         <div id="tab5" class="bi-panel">
             <div class="powerbi-wrapper">
                 <iframe title="AllocNodeCapEx" src="https://powerbi.com" allowFullScreen="true"></iframe>
@@ -132,3 +130,8 @@
             <div class="card">
                 <span class="badge badge-travel">PHASE 6 // LOGISTICS</span>
                 <h3>Multi-Carrier Global Travel Network</h3>
+                <p>Deploys a high-velocity transit optimization matrix integrating high-volume commercial airlines (Delta, United, American), Global Distribution Systems (Sabre, Expedia), leisure travel networks (AAA), and Defense Transportation Systems (Air Mobility Command) managing up to 45,000 daily dispatched legs.</p>
+            </div>
+            <div class="card">
+                <span class="badge badge-insurance">PHASE 7 // RISK</span>
+                <h3>Sovereign Insurance Solvency Core</h3>
