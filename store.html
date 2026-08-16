@@ -3,53 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Johnny Campbell, PMP | JCPythonCS Architecture Storefront</title>
+    <title>Johnny Campbell, PMP | Premium Architecture Storefront</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f6f9; color: #333; }
-        header { background: #002b49; color: #fff; padding: 40px 20px; text-align: center; border-bottom: 5px solid #005a9c; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        header h1 { margin: 0; font-size: 2.5em; letter-spacing: 1px; }
-        header p { margin: 10px 0 0; font-size: 1.2em; color: #cbd5e1; }
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .section { background: #fff; padding: 35px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #10b981; }
-        h2 { color: #002b49; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        header { background: #0f172a; color: #fff; padding: 40px 20px; text-align: center; border-bottom: 5px solid #005a9c; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        header h1 { margin: 0; font-size: 2.2em; letter-spacing: 1px; }
+        header p { margin: 10px 0 0; font-size: 1.1em; color: #cbd5e1; }
+        .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+        .nav-back { margin-bottom: 25px; }
+        .nav-back a { color: #005a9c; text-decoration: none; font-weight: bold; font-size: 1.1em; }
+        .nav-back a:hover { text-decoration: underline; }
+        .section { background: #fff; padding: 30px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #10b981; }
+        h2 { color: #0f172a; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
         
-        .store-grid { display: grid; grid-template-columns: 1fr; gap: 25px; margin-top: 20px; }
-        .price-tag { font-size: 1.8em; color: #10b981; font-weight: bold; margin: 15px 0; }
-        .checkout-btn { display: inline-block; background: #10b981; color: #fff; text-decoration: none; padding: 15px 40px; font-size: 1.2em; font-weight: bold; border-radius: 6px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-bottom: 4px solid #059669; transition: all 0.2s; }
-        .checkout-btn:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        /* 6-TIER COMMERCE REVENUE CATALOG GRID DISPLAY */
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
+        .store-card { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 4px 10px rgba(16,185,129,0.08); border: 1px solid #e2e8f0; border-top: 4px solid #10b981; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
+        .store-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(16,185,129,0.15); }
+        .store-card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.25em; }
+        .store-card p { color: #475569; font-size: 0.95em; flex-grow: 1; margin-bottom: 15px; line-height: 1.5; }
+        .price-tag { font-size: 1.6em; color: #10b981; font-weight: bold; margin-bottom: 15px; }
+        .checkout-btn { display: block; text-align: center; background: #10b981; color: #fff; text-decoration: none; padding: 12px 20px; font-size: 1em; font-weight: bold; border-radius: 6px; box-shadow: 0 3px 5px rgba(0,0,0,0.08); border-bottom: 3px solid #059669; transition: all 0.2s; }
+        .checkout-btn:hover { background: #059669; }
         
-        .contact-info { text-align: center; margin-top: 40px; padding: 35px 20px; background: #002b49; color: #fff; border-radius: 8px; border-top: 4px solid #005a9c; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* AIRTIGHT BOARDROOM FOOTER CORE STYLING */
+        .contact-info { text-align: center; margin-top: 50px; padding: 35px 20px; background: #002b49; color: #fff; border-radius: 8px; border-top: 4px solid #005a9c; }
         .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 20px; font-size: 1.1em; }
         .contact-item { background: rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); }
-        .contact-info a { color: #cbd5e1; text-decoration: none; font-weight: bold; transition: color 0.2s; }
+        .contact-info a { color: #cbd5e1; text-decoration: none; font-weight: bold; }
         .contact-info a:hover { color: #ffffff; text-decoration: underline; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>JCPythonCS Global Repository Storefront</h1>
-    <p>Computer Science & Artificial Intelligence Management Architecture Modules</p>
-    <div class="nav-back">
-    <a href="index.html">⬅️ Return to Core Professional Portfolio Homepage</a>
-</div>
+    <h1>Johnny Campbell, Technical Architecture Repository</h1>
+    <p>Automated Enterprise Solutions & PMP Management Frameworks</p>
 </header>
 
 <div class="container">
+    <div class="nav-back">
+        <a href="index.html">⬅️ Return to Core Professional Portfolio Homepage</a>
+    </div>
+
+    <!-- 6-TIER HIGH-VELOCITY REVENUE REPOSITORY STOREFRONT -->
     <div class="section">
-        <h2>Premium Enterprise Digital Architecture Assets</h2>
-        <p>Gain absolute execution clearance to my verified, production-ready technical database repositories, full-lifecycle automation scripts, and PMP management baselines engineered across Civilian, Federal, and Defense perimeters.</p>
+        <h2>🛒 JCPythonCS Technical Script Storefront</h2>
+        <p style="color: #475569; font-size: 1.05em; margin-bottom: 20px;">Gain absolute execution clearance to my premium, production-ready relational architecture database libraries, full-lifecycle automation scripts, and PMP management baselines. Processes securely 24/7 directly via PayPal:</p>
         
         <div class="store-grid">
+            <!-- TIER 1 -->
             <div class="store-card">
-                <h3 style="color: #005a9c; font-size: 1.4em; margin-top: 10px;">Enterprise T-SQL Database Schema & Automation Bundle</h3>
-                <p style="color: #475569; font-size: 1.05em;">Includes high-performance non-clustered optimization indexes, transaction-safe storage ingestion pipelines, wide-character Unicode injection vulnerability blocks, and complex analytical risk queries modeled for high-stakes telemetry monitoring.</p>
-                <div class="price-tag">Production Value: $49.00</div>
-                <a href="https://gumroad.com" target="_blank" class="checkout-btn">💳 ACQUIRE REPOSITORY FILES VIA SECURE CHECKOUT</a>
+                <h3>1. T-SQL Syntax Reference Kit</h3>
+                <p>Pre-vetted operational code snippets, optimized script lookups, and transactional performance fixes for rapid onboarding.</p>
+                <div class="price-tag">$19.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE KIT</a>
+            </div>
+
+            <!-- TIER 2 -->
+            <div class="store-card">
+                <h3>2. Core Database Script Library</h3>
+                <p>High-performance non-clustered optimization indexes, transaction-safe data ingestion pipelines, and wide-character Unicode injection blocks.</p>
+                <div class="price-tag">$49.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE REPOSITORY</a>
+            </div>
+
+            <!-- TIER 3 -->
+            <div class="store-card">
+                <h3>3. PMP Technical Project Management Kit</h3>
+                <p>End-to-end Technical Program Director tracking templates, CapEx resource allocation ledgers, and multi-line risk assessment matrices.</p>
+                <div class="price-tag">$99.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE KIT</a>
+            </div>
+
+            <!-- TIER 4 -->
+            <div class="store-card">
+                <h3>4. Advanced Database Migration Blueprint</h3>
+                <p>A comprehensive engineering systems architecture guide for migrating legacy on-premise layouts into Azure SQL Serverless containers.</p>
+                <div class="price-tag">$199.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE BLUEPRINT</a>
+            </div>
+
+            <!-- TIER 5 -->
+            <div class="store-card">
+                <h3>5. Sovereign Asset Management Deck</h3>
+                <p>Advanced liquidity stress-testing database schemas modeled to reconcile multi-trillion dollar clearing nodes across Civ/Fed/Mil networks.</p>
+                <div class="price-tag">$499.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE DATA SHEETS</a>
+            </div>
+
+            <!-- TIER 6 -->
+            <div class="store-card">
+                <h3>6. Director Repository Masterclass</h3>
+                <p>The ultimate master bundle uniting all 5 asset tiers, schema layouts, and tracking metrics into a single unified workspace with lifetime updates.</p>
+                <div class="price-tag">$999.00</div>
+                <a href="https://paypal.com" target="_blank" class="checkout-btn">💳 ACQUIRE MASTER VAULT</a>
             </div>
         </div>
     </div>
 
+    <!-- PRESERVED AND BRAND-FORTIFIED EXECUTIVE FOOTER -->
     <div class="contact-info">
         <h3>Command Center Engagement</h3>
         <div class="contact-grid">
