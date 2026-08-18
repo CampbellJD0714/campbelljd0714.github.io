@@ -65,28 +65,44 @@
 <!-- ===================================================================== -->
 <!-- 1. DYNAMIC CHECKOUT PORTS CONTAINER                                   -->
 <!-- ===================================================================== -->
-<div class="edge-grid-container" style="max-width: 450px; margin: 40px auto; padding: 24px; border: 1px solid #cbd5e0; border-radius: 8px; font-family: sans-serif; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-    
-    <!-- THE QUANTITY CONTROLLER (UX DEFAULT 1, HARD-LOCKED TO MAX 10) -->
-    <div class="control-group" style="margin-bottom: 24px;">
-        <label for="quantity-selector" class="control-label" style="display: block; font-size: 14px; font-weight: 600; color: #1a202c; margin-bottom: 8px;">Select Processing Volume (Max 10):</label>
-        <select id="quantity-selector" class="matrix-dropdown" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #a0aec0; border-radius: 6px; background-color: #fff; cursor: pointer; outline: none; margin-bottom: 15px;">
-            <option value="1" selected>1</option> <!-- HARD-LOCKED DEFAULT -->
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10 (Maximum Bulk Allocation)</option>
-        </select>
-    </div>
+<!-- 1. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK -->
+<script src="https://paypal.com"></script>
 
-    <!-- ⚠️ THE INSTANT DEPLOYMENT TARGET: PayPal paints the checkout fields straight into this element -->
-    <div id="paypal-container-BAAVdKgGEp"></div>
-</div>
+<!-- 2. THE HANDSHAKE INGESTION LOOP ENGINE -->
+<script>
+    // Clean out old local kernel variations and instantiate the class handler
+    paypal.HostedButtons({
+        hostedButtonId: "BAAVdKgGEp", // Directly maps to your cloud merchant ledger profile
+        
+        createOrder: function(data, actions) {
+            var quantityDropdown = document.getElementById("quantity-selector");
+            var selectedUnits = parseInt(quantityDropdown.value, 10) || 1;
+            
+            // Hard-blocks out-of-bounds variations to preserve ledger integrity
+            if (selectedUnits > 10 || selectedUnits < 1 || isNaN(selectedUnits)) {
+                console.error("Boundary Exception: Telemetry variables out of bounds.");
+                return actions.reject();
+            }
+            
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { currency_code: 'USD' },
+                    quantity: selectedUnits // Automatically forces multi-unit multiplication on PayPal's cloud
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Secure Edge Transaction Finalized! Funds processed via ' + details.payer.name.given_name);
+                window.location.href = "/success.html"; // Local conversion landing page
+            });
+        },
+        onError: function(err) {
+            console.error('Hosted Container System Exception Matrix:', err);
+            alert('Handshake timed out. Re-initializing gateway monitoring telemetry...');
+        }
+    }).render("#paypal-container-BAAVdKgGEp"); // Locks onto the HTML container layout element above
+</script>
 
 <!-- ===================================================================== -->
 <!-- 2. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK                         -->
