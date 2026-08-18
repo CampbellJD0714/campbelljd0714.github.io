@@ -6,9 +6,14 @@
     <title>Johnny Campbell, PMP | Premium Architecture Storefront</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f6f9; color: #333; }
-        header { background: #0f172a; color: #fff; padding: 40px 20px; text-align: center; border-bottom: 5px solid #005a9c; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        header { background: #0f172a; color: #fff; padding: 40px 20px; text-align: center; border-bottom: 5px solid #005a9c; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; }
         header h1 { margin: 0; font-size: 2.2em; letter-spacing: 1px; }
         header p { margin: 10px 0 0; font-size: 1.1em; color: #cbd5e1; }
+        
+        /* Floating Top Cart Status Badge */
+        .cart-status-badge { position: absolute; top: 20px; right: 20px; background: #10b981; color: white; padding: 10px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .cart-status-badge:hover { background: #059669; }
+
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .nav-back { margin-bottom: 25px; }
         .nav-back a { color: #005a9c; text-decoration: none; font-weight: bold; font-size: 1.1em; }
@@ -23,26 +28,46 @@
         .card-blue { border-top: 4px solid #005a9c; }
         .store-card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.25em; }
         .store-card p { color: #475569; font-size: 0.95em; flex-grow: 1; margin-bottom: 15px; line-height: 1.5; }
+        
         .price-tag { font-size: 1.6em; font-weight: bold; margin-bottom: 15px; }
         .price-green { color: #10b981; }
         .price-blue { color: #005a9c; }
-        .checkout-btn { display: block; text-align: center; color: #fff; text-decoration: none; padding: 12px 20px; font-size: 1em; font-weight: bold; border-radius: 6px; box-shadow: 0 3px 5px rgba(0,0,0,0.08); transition: all 0.2s; }
+        
+        /* Functional Add to Cart Controls */
+        .card-controls { display: flex; gap: 10px; margin-top: 10px; }
+        .quantity-dropdown { padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 1em; width: auto; min-width: 70px; }
+        
+        .checkout-btn { display: block; text-align: center; color: #fff; text-decoration: none; padding: 12px 20px; font-size: 1em; font-weight: bold; border-radius: 6px; box-shadow: 0 3px 5px rgba(0,0,0,0.08); transition: all 0.2s; width: 100%; border: none; cursor: pointer; }
         .btn-green { background: #10b981; border-bottom: 3px solid #059669; }
         .btn-green:hover { background: #059669; }
         .btn-blue { background: #005a9c; border-bottom: 3px solid #002b49; }
         .btn-blue:hover { background: #002b49; }
+        
+        /* Dedicated Cart Display Area */
+        .cart-section { background: #fff; padding: 30px; margin-top: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #cbd5e1; }
+        .cart-item-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-size: 1.05em; }
+        .cart-item-row button { background: #ef4444; color: white; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; }
+        .cart-item-row button:hover { background: #dc2626; }
+        .cart-totals-display { font-size: 1.4em; font-weight: bold; text-align: right; margin: 20px 0; color: #0f172a; }
+        
+        /* PayPal Integration Target Container */
+        .paypal-injection-target { max-width: 350px; margin: 20px 0 0 auto; text-align: right; }
+
         .contact-info { text-align: center; margin-top: 50px; padding: 35px 20px; background: #002b49; color: #fff; border-radius: 8px; border-top: 4px solid #005a9c; }
         .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 20px; font-size: 1.1em; }
         .contact-item { background: rgba(255,255,255,0.08); padding: 10px 20px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); }
         .contact-info a { color: #cbd5e1; text-decoration: none; font-weight: bold; }
         .contact-info a:hover { color: #ffffff; text-decoration: underline; }
     </style>
+    <!-- Real PayPal Smart Payment SDK Integration Link -->
+    <script src="https://paypal.com"></script>
 </head>
 <body>
 
 <header>
     <h1>Johnny Campbell, Technical Architecture Repository</h1>
     <p>Automated Enterprise Solutions & PMP Management Frameworks</p>
+    <div class="cart-status-badge" onclick="navigateToCart()">🛒 Cart (<span id="global-cart-counter">0</span>)</div>
 </header>
 
 <div class="container">
@@ -50,265 +75,95 @@
         <a href="index.html">⬅️ Return to Core Professional Portfolio Homepage</a>
     </div>
 
-        <!-- Section 1: Standard Blueprints & Advanced Frameworks (Cards 1 through 12 Unified for Perfect Grid Alignment) -->
-        <div class="section section-blue">
-            <h2>Core Infrastructure Frameworks &amp; Autonomous Systems</h2>
-            <div class="store-grid">
-                <!-- Card 1 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>1. Edge Compute Grid Blueprint</h3>
-                        <p>High-availability architectural mapping for multi-region regional processing edge nodes.</p>
-                    </div>
-                    <div>
-
-<!-- ===================================================================== -->
-<!-- 1. DYNAMIC CHECKOUT PORTS CONTAINER                                   -->
-<!-- ===================================================================== -->
-<!-- 1. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK -->
-<script src="https://paypal.com"></script>
-
-<!-- 2. THE HANDSHAKE INGESTION LOOP ENGINE -->
-<script>
-    // Clean out old local kernel variations and instantiate the class handler
-    paypal.HostedButtons({
-        hostedButtonId: "BAAVdKgGEp", // Directly maps to your cloud merchant ledger profile
-        
-        createOrder: function(data, actions) {
-            var quantityDropdown = document.getElementById("quantity-selector");
-            var selectedUnits = parseInt(quantityDropdown.value, 10) || 1;
+    <!-- Section 1: Standard Blueprints & Advanced Frameworks -->
+    <div class="section section-blue">
+        <h2>Core Infrastructure Frameworks &amp; Autonomous Systems</h2>
+        <div class="store-grid">
             
-            // Hard-blocks out-of-bounds variations to preserve ledger integrity
-            if (selectedUnits > 10 || selectedUnits < 1 || isNaN(selectedUnits)) {
-                console.error("Boundary Exception: Telemetry variables out of bounds.");
-                return actions.reject();
-            }
-            
-            return actions.order.create({
-                purchase_units: [{
-                    amount: { currency_code: 'USD' },
-                    quantity: selectedUnits // Automatically forces multi-unit multiplication on PayPal's cloud
-                }]
-            });
-        },
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                alert('Secure Edge Transaction Finalized! Funds processed via ' + details.payer.name.given_name);
-                window.location.href = "/success.html"; // Local conversion landing page
-            });
-        },
-        onError: function(err) {
-            console.error('Hosted Container System Exception Matrix:', err);
-            alert('Handshake timed out. Re-initializing gateway monitoring telemetry...');
-        }
-    }).render("#paypal-container-BAAVdKgGEp"); // Locks onto the HTML container layout element above
-</script>
-
-<!-- ===================================================================== -->
-<!-- 2. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK                         -->
-<!-- ===================================================================== -->
-<script src="https://paypal.com"></script>
-
-<!-- ===================================================================== -->
-<!-- 3. SERVER-DRIVEN STREAMING TRANSACTION LOGIC                          -->
-<!-- ===================================================================== -->
-<script>
-    // Executing the official hosted button class lifecycle wrapper
-    paypal.HostedButtons({
-        hostedButtonId: "BAAVdKgGEp", // Securely binds to your cloud profile ledger
-        
-        // This callback intercepts the quantity value the millisecond a user clicks the payment option
-        createOrder: function(data, actions) {
-            var quantityDropdown = document.getElementById("quantity-selector");
-            var selectedUnits = parseInt(quantityDropdown.value, 10) || 1;
-            
-            // Hard-blocks out-of-bounds client variations to preserve ledger integrity
-            if (selectedUnits > 10 || selectedUnits < 1 || isNaN(selectedUnits)) {
-                console.error("Boundary Exception: Telemetry variables out of bounds.");
-                return actions.reject();
-            }
-            
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        currency_code: 'USD'
-                    },
-                    quantity: selectedUnits // Instructs PayPal's server to process the multiplication
-                }]
-            });
-        },
-        
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                alert('Secure Edge Transaction Finalized! Funds processed via ' + details.payer.name.given_name);
-                // Safe redirect straight to your local conversion landing page node
-                window.location.href = "/success.html"; 
-            });
-        },
-        
-        onError: function(err) {
-            console.error('Hosted Container System Exception Matrix:', err);
-            alert('Gateway response timeout. Re-initializing tracking loops...');
-        }
-    }).render("#paypal-container-BAAVdKgGEp"); // Locks directly onto the HTML layout node above
-</script>
-
-                        <div class="price">$99.00</div>
-                        <button class="btn" onclick="alert('Item 1 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
+            <!-- Card 1 -->
+            <div class="store-card card-blue">
+                <div>
+                    <h3>1. Edge Compute Grid Blueprint</h3>
+                    <p>High-availability architectural mapping for multi-region regional processing edge nodes.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>2. Enterprise Security Architecture</h3>
-                        <p>End-to-end organizational network configuration protocols with physical security mapping.</p>
-                    </div>
-                    <div>
-                        <div class="price">$149.00</div>
-                        <button class="btn" onclick="alert('Item 2 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>3. Global Datacenter Schema</h3>
-                        <p>Structured tier-4 facility operational diagrams and hardware configuration stacks.</p>
-                    </div>
-                    <div>
-                        <div class="price">$179.00</div>
-                        <button class="btn" onclick="alert('Item 3 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>4. Disaster Recovery Engine</h3>
-                        <p>Multi-cloud failsafe blueprints featuring zero-loss data replication nodes.</p>
-                    </div>
-                    <div>
-                        <div class="price">$199.00</div>
-                        <button class="btn" onclick="alert('Item 4 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 5 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>5. Urban Fiber Matrix Blueprint</h3>
-                        <p>Metropolitan high-speed fiber routing schemas optimized for minimal path routing conflicts.</p>
-                    </div>
-                    <div>
-                        <div class="price">$219.00</div>
-                        <button class="btn" onclick="alert('Item 5 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>6. Municipal Smart Grid Layout</h3>
-                        <p>Dynamic electrical grid allocation infrastructure architecture for automated loadbalancing.</p>
-                    </div>
-                    <div>
-                        <div class="price">$239.00</div>
-                        <button class="btn" onclick="alert('Item 6 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 7 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>7. Next-Gen Telecom Base Blueprint</h3>
-                        <p>Architectural schemas for millimeter wave deployment across dense municipal zones.</p>
-                    </div>
-                    <div>
-                        <div class="price">$259.00</div>
-                        <button class="btn" onclick="alert('Item 7 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 8 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>8. Automated Transit Command Grid</h3>
-                        <p>Real-time vehicle telemetry control architecture blueprint for light rail systems.</p>
-                    </div>
-                    <div>
-                        <div class="price">$279.00</div>
-                        <button class="btn" onclick="alert('Item 8 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 9 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>9. Autonomous Logistics Control Network</h3>
-                        <p>Hardened data lake blueprint coordinating subterranean hyperloop freight segments, drone flight paths, and robotic shipping port guidance grids with zero latency drift.</p>
-                    </div>
-                    <div>
-                        <div class="price">$299.00</div>
-                        <button class="btn" onclick="alert('Item 9 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 10 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>10. Orbital Economy &amp; LEO Custodial Core</h3>
-                        <p>Specialized aerospace schema mapping automated asteroid mineral extraction, lunar manufacturing infrastructure, and space station cargo shipping manifests.</p>
-                    </div>
-                    <div>
-                        <div class="price">$399.00</div>
-                        <button class="btn" onclick="alert('Item 10 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 11 (RESTORING TEXT & SYSTEM FUNCTION) -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>11. Planetary Climate Engineering Ledger</h3>
-                        <p>High-frequency database tracking matrix built for planetary direct-air carbon capture, solar radiation atmospheric albedo shifts, and macro irrigation networks.</p>
-                    </div>
-                    <div>
-                        <div class="price">$449.00</div>
-                        <button class="btn" onclick="alert('Item 11 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
-                </div>
-                <!-- Card 12 -->
-                <div class="store-card card-blue">
-                    <div>
-                        <h3>12. Continental Biomanufacturing Blueprint</h3>
-                        <p>Relational metadata model tracking automated synthetic biology bioreactors, tensile harvest markers, and sub-zero cold-chain mRNA sequence queues.</p>
-                    </div>
-                    <div>
-                        <div class="price">$499.00</div>
-                        <button class="btn" onclick="alert('Item 12 added to cart!')">&#128179; ACQUIRE BLUEPRINT</button>
+                <div>
+                    <div class="price-tag price-blue">$150.00</div>
+                    <div class="card-controls">
+                        <!-- Updated drop-down label for max limit notice -->
+                        <select id="qty-card-1" class="quantity-dropdown">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10 (Max)</option>
+                        </select>
+                        <button class="checkout-btn btn-blue" onclick="addItemToCart('Edge Compute Grid Blueprint', 150.00, 'qty-card-1')">Add to Cart</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Section 3: Macro-Infrastructure Ledger (Cards 13 and 14) -->
-        <div class="section">
-            <h2>Macro-Infrastructure Ledger</h2>
-            <div class="store-grid">
-                <!-- Card 13 -->
-                <div class="store-card card-green">
-                    <div>
-                        <h3>13. Deep Sea Infrastructure Data Lake</h3>
-                        <p>High-pressure database tracking architecture built for sub-surface data center enclosures, hydrothermal fiber velocities, and benthic mining rovers.</p>
-                    </div>
-                    <div>
-                        <div class="price">$549.00</div>
-                        <button class="btn btn-green" onclick="alert('Item 13 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
-                    </div>
+            <!-- Card 2 -->
+            <div class="store-card card-green">
+                <div>
+                    <h3>2. Enterprise PMP Management Deck</h3>
+                    <p>Automated cloud management scaling parameters and agile system frameworks.</p>
                 </div>
-                <!-- Card 14 -->
-                <div class="store-card card-green">
-                    <div>
-                        <h3>14. Mega-Region Connectivity Matrix</h3>
-                        <p>The ultimate macro-infrastructure ledger mapping continental maglev segment velocities, smart-city IoT sensor nodes, and automated agricultural belts.</p>
-                    </div>
-                    <div>
-                        <div class="price">$599.00</div>
-                        <button class="btn btn-green" onclick="alert('Item 14 added to cart!')">&#128179; ACQUIRE MATRIX</button>
+                <div>
+                    <div class="price-tag price-green">$95.00</div>
+                    <div class="card-controls">
+                        <!-- Updated drop-down label for max limit notice -->
+                        <select id="qty-card-2" class="quantity-dropdown">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10 (Max)</option>
+                        </select>
+                        <button class="checkout-btn btn-green" onclick="addItemToCart('Enterprise PMP Management Deck', 95.00, 'qty-card-2')">Add to Cart</button>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-</body>
-</html>
+
+    <!-- Interactive Shopping Cart and Dynamic Checkout Portal Layout Component -->
+    <div class="cart-section" id="shopping-cart-view">
+        <h2>Your Architecture Cart Ledger</h2>
+        <div id="cart-items-wrapper">
+            <p style="color: #64748b; font-style: italic;">Your shopping cart is currently empty.</p>
+        </div>
+        
+        <div class="cart-totals-display">
+            Grand Total: $<span id="cart-calculated-total">0.00</span>
+        </div>
+        
+        <!-- PayPal Interactive Container Ingestion Port -->
+        <div class="paypal-injection-target" id="paypal-smart-button-container" style="display: none;">
+            <div id="paypal-button-renderer"></div>
+        </div>
+    </div>
+
+    <!-- Core Contact Infostructure Footer Block -->
+    <div class="contact-info">
+        <h3>Need custom modifications or architectural consultation?</h3>
+        <div class="contact-grid">
+            <div class="contact-item">📧 Email: <a href="mailto:j.campbell@pmp-architecture.local">j.campbell@pmp-architecture.local</a></div>
+            <div class="contact-item">💼 LinkedIn: <a href="#">://linkedin.com</a></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================================== -->
+<!-- SERVER-DRIVEN STREAMING TRANSACTION AND LEDGER CLIENT LOGIC           -->
+<script>
