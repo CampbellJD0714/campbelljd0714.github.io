@@ -63,15 +63,15 @@
                     <div>
 
 <!-- ===================================================================== -->
-<!-- 1. THE HOSTED INFRASTRUCTURE CONTAINER MATRIX                         -->
+<!-- 1. DYNAMIC CHECKOUT PORTS CONTAINER                                   -->
 <!-- ===================================================================== -->
 <div class="edge-grid-container" style="max-width: 450px; margin: 40px auto; padding: 24px; border: 1px solid #cbd5e0; border-radius: 8px; font-family: sans-serif; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     
     <!-- THE QUANTITY CONTROLLER (UX DEFAULT 1, HARD-LOCKED TO MAX 10) -->
-    <div class="control-group" style="margin-bottom: 20px;">
+    <div class="control-group" style="margin-bottom: 24px;">
         <label for="quantity-selector" class="control-label" style="display: block; font-size: 14px; font-weight: 600; color: #1a202c; margin-bottom: 8px;">Select Processing Volume (Max 10):</label>
-        <select id="quantity-selector" class="matrix-dropdown" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #a0aec0; border-radius: 6px; background-color: #fff; cursor: pointer; outline: none;">
-            <option value="1" selected>1</option> <!-- DEFAULT UX INT START -->
+        <select id="quantity-selector" class="matrix-dropdown" style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid #a0aec0; border-radius: 6px; background-color: #fff; cursor: pointer; outline: none; margin-bottom: 15px;">
+            <option value="1" selected>1</option> <!-- HARD-LOCKED DEFAULT -->
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -84,41 +84,40 @@
         </select>
     </div>
 
-    <!-- ⚠️ CRITICAL TARGET FIX: PayPal needs this explicit ID to paint the graphics -->
+    <!-- ⚠️ THE INSTANT DEPLOYMENT TARGET: PayPal paints the checkout fields straight into this element -->
     <div id="paypal-container-BAAVdKgGEp"></div>
 </div>
 
 <!-- ===================================================================== -->
-<!-- 2. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK (UNTOUCHED)             -->
+<!-- 2. YOUR EXACT APIMATIC HOSTED SDK ENGINE LINK                         -->
 <!-- ===================================================================== -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAVdKgGEpVKnvpDWt6T7kLQaqlsH7cScKSDZHvbnnPVaoQNPqPiQTdK9RJ9-Oz1Cbrbn3Wnm_vYNC6MEs&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+<script src="https://paypal.com"></script>
 
 <!-- ===================================================================== -->
-<!-- 3. SERVER-DRIVEN CONTAINER HANDSHAKE LOOP                             -->
+<!-- 3. SERVER-DRIVEN STREAMING TRANSACTION LOGIC                          -->
 <!-- ===================================================================== -->
 <script>
-    // Executing the dedicated HostedButtons class instantiation
+    // Executing the official hosted button class lifecycle wrapper
     paypal.HostedButtons({
-        hostedButtonId: "BAAVdKgGEp", // Tracks straight to your cloud merchant profile token
+        hostedButtonId: "BAAVdKgGEp", // Securely binds to your cloud profile ledger
         
-        // Dynamic callback array intercepts selected unit volumes prior to handshake routing
+        // This callback intercepts the quantity value the millisecond a user clicks the payment option
         createOrder: function(data, actions) {
             var quantityDropdown = document.getElementById("quantity-selector");
             var selectedUnits = parseInt(quantityDropdown.value, 10) || 1;
             
-            // Hard-blocks out-of-bounds client manipulations at the gateway perimeter
+            // Hard-blocks out-of-bounds client variations to preserve ledger integrity
             if (selectedUnits > 10 || selectedUnits < 1 || isNaN(selectedUnits)) {
                 console.error("Boundary Exception: Telemetry variables out of bounds.");
                 return actions.reject();
             }
             
-            // Overrides order configuration arrays with your dynamic volume parameters
             return actions.order.create({
                 purchase_units: [{
                     amount: {
                         currency_code: 'USD'
                     },
-                    quantity: selectedUnits // PayPal's server uses this to multiply the transaction value
+                    quantity: selectedUnits // Instructs PayPal's server to process the multiplication
                 }]
             });
         },
@@ -126,17 +125,17 @@
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
                 alert('Secure Edge Transaction Finalized! Funds processed via ' + details.payer.name.given_name);
-                // Redirect straight to your local conversion landing page node
+                // Safe redirect straight to your local conversion landing page node
                 window.location.href = "/success.html"; 
             });
         },
         
         onError: function(err) {
             console.error('Hosted Container System Exception Matrix:', err);
-            alert('Handshake timed out. Re-initializing gateway monitoring telemetry...');
+            alert('Gateway response timeout. Re-initializing tracking loops...');
         }
-    }).render("#paypal-container-BAAVdKgGEp"); // Targets the HTML container element ID perfectly
-</script
+    }).render("#paypal-container-BAAVdKgGEp"); // Locks directly onto the HTML layout node above
+</script>
 
                         <div class="price">$99.00</div>
                         <button class="btn" onclick="alert('Item 1 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
