@@ -61,6 +61,119 @@
                         <p>High-availability architectural mapping for multi-region regional processing edge nodes.</p>
                     </div>
                     <div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge Compute Grid Portal</title>
+    <!-- Hard-lock authoritative corporate typography parameters -->
+    <style>
+        .edge-grid-container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 24px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background-color: #ffffff;
+        }
+        .control-group {
+            margin-bottom: 20px;
+        }
+        .control-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+        .matrix-dropdown {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #a0aec0;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #2d3748;
+            cursor: pointer;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="edge-grid-container">
+    <!-- 1. DYNAMIC QUANTITY SELECTOR WINDOW -->
+    <div class="control-group">
+        <label for="quantity-selector" class="control-label">Select Processing Volume (Max 10):</label>
+        <select id="quantity-selector" class="matrix-dropdown">
+            <option value="1" selected>1</option> <!-- STRUCTURAL UX DEFAULT -->
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10 (Maximum Bulk Allocation)</option>
+        </select>
+    </div>
+
+    <!-- 2. HOSTED PAYPAL PAYMENTS INGESTION NODE -->
+    <div id="paypal-container-BAAVdKgGEp"></div>
+</div>
+
+<!-- 3. OFFICIAL HOSTED-BUTTONS NETWORK GATEWAY CLIENT ENGINE -->
+<script src="https://www.paypal.com/sdk/js?client-id=BAAVdKgGEpVKnvpDWt6T7kLQaqlsH7cScKSDZHvbnnPVaoQNPqPiQTdK9RJ9-Oz1Cbrbn3Wnm_vYNC6MEs&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
+
+<script>
+    // 4. INSTANTIATE THE SECURE CLOUD-HOSTED CONTAINER ARRAY
+    paypal.HostedButtons({
+        hostedButtonId: "BAAVdKgGEp", // Binds the UI directly to your dashboard server configuration
+        
+        // Dynamic callback hook to extract quantity variables prior to network routing
+        createOrder: function(data, actions) {
+            var quantityDropdown = document.getElementById("quantity-selector");
+            var selectedUnits = parseInt(quantityDropdown.value, 10) || 1;
+            
+            // Hard-locks runtime bounds validation to insulate against script injection
+            if (selectedUnits > 10 || selectedUnits < 1 || isNaN(selectedUnits)) {
+                console.error("Boundary Exception: Telemetry out of bounds.");
+                return actions.reject();
+            }
+            
+            // Overrides the payment matrix with your user-selected quantity parameters
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        currency_code: 'USD'
+                    },
+                    quantity: selectedUnits
+                }]
+            });
+        },
+        
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                alert('Secure Edge Transaction Compiled! Captured from ' + details.payer.name.given_name);
+                // Safe terminal escape path redirecting straight to your local conversion landing sheet
+                window.location.href = "/success.html"; 
+            });
+        },
+        
+        onError: function(err) {
+            console.error('Hosted Grid Exception Token:', err);
+            alert('Processing pipeline timeout. Re-seeding gateway array...');
+        }
+    }).render("#paypal-container-BAAVdKgGEp");
+</script>
+
+</body>
+</html>
                         <div class="price">$99.00</div>
                         <button class="btn" onclick="alert('Item 1 added to cart!')">&#128179; ACQUIRE SCHEMA</button>
                     </div>
